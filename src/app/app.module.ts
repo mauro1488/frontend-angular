@@ -7,11 +7,12 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductoComponent } from './producto/producto.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { RouterModule, Routes } from '@angular/router';
-import { Router } from 'express';
+//import { Router } from 'express';
 import { HttpClientModule } from '@angular/common/http';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import {  registerLocaleData } from '@angular/common';
 import localesES from '@angular/common/locales/es';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FotoComponent } from './clientes/foto/foto.component';
 
 registerLocaleData(localesES, 'es');
 
@@ -30,7 +32,8 @@ const routes: Routes=[
   {path: 'clientes', component: ClientesComponent},
   {path: 'clientes/page/:page', component: ClientesComponent},
   {path: 'clientes/form', component: FormComponent},
-  {path: 'clientes/form/:id', component: FormComponent}
+  {path: 'clientes/form/:id', component: FormComponent},
+  //{path: 'clientes/ver/:id', component: FotoComponent}
 ];
 
 @NgModule({
@@ -41,7 +44,8 @@ const routes: Routes=[
     ProductoComponent,
     ClientesComponent,
     FormComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    FotoComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ const routes: Routes=[
     MatNativeDateModule
     
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'es' }, MatDatepickerModule, provideAnimationsAsync()
+  providers: [{provide: LOCALE_ID, useValue: 'es' }, MatDatepickerModule, provideHttpClient(withFetch()),
+    provideAnimationsAsync()
     
   ],
   bootstrap: [AppComponent]
